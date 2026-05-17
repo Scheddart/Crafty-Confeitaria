@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles.css?v=6" />
+  <link rel="stylesheet" href="styles.css?v=7" />
 </head>
 <body>
 
@@ -72,7 +72,12 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero" data-section="hero">
-      <div class="hero__bg" data-hero-bg></div>
+      <!-- Video de fundo. Drop o arquivo em assets/hero.mp4 -->
+      <video class="hero__video" autoplay muted loop playsinline preload="auto"
+             poster="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=1800&q=80">
+        <source src="assets/hero.mp4" type="video/mp4" />
+      </video>
+      <div class="hero__video-overlay" aria-hidden="true"></div>
 
       <div class="hero__content">
         <span class="hero__eyebrow" data-reveal>★ Confeitaria autoral · Desde 2018</span>
@@ -487,6 +492,6 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
   <script src="https://unpkg.com/split-type"></script>
-  <script src="script.js?v=8"></script>
+  <script src="script.js?v=9"></script>
 </body>
 </html>

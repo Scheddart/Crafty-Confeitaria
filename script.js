@@ -102,8 +102,13 @@ document.querySelectorAll("[data-float]").forEach((el) => {
   });
 });
 
-gsap.to(".hero__bg", {
-  scale: 1.2, opacity: .3, ease: "none",
+/* Parallax sutil do vídeo ao scrollar fora do hero */
+gsap.to(".hero__video", {
+  scale: 1.08, yPercent: 8, ease: "none",
+  scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
+});
+gsap.to(".hero__video-overlay", {
+  opacity: 1.15, ease: "none",
   scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true }
 });
 
@@ -262,27 +267,42 @@ mm.add("(min-width: 901px)", () => {
 });
 
 /* ----------------------------------------------------------
-   11b. PROCESS — vertical + fade (mobile)
-   Sem pin, sem stack. Cada sticker faz fade-in ao entrar na tela.
+   11b. PROCESS — interleaved (mobile)
+   Clona cada imagem do sticker dentro do seu step correspondente.
+   Cada step fica: número + título + descrição + imagem (vertical).
    ---------------------------------------------------------- */
 mm.add("(max-width: 900px)", () => {
+  const lis      = document.querySelectorAll("[data-step]");
   const stickers = document.querySelectorAll(".sticker");
-  const steps    = document.querySelectorAll("[data-step]");
+  const clones   = [];
 
-  stickers.forEach((s) => {
-    gsap.set(s, { opacity: 0, y: 30 });
-    gsap.to(s, {
+  lis.forEach((li, i) => {
+    if (!stickers[i]) return;
+    const textDiv = li.querySelector("div");
+    const origImg = stickers[i].querySelector("img");
+    if (!textDiv || !origImg) return;
+
+    const wrap = document.createElement("div");
+    wrap.className = "step__img";
+    wrap.appendChild(origImg.cloneNode(true));
+    textDiv.appendChild(wrap);
+    clones.push(wrap);
+  });
+
+  /* Anima a imagem clonada (não o sticker original, que está escondido) */
+  clones.forEach((img) => {
+    gsap.to(img, {
       opacity: 1, y: 0,
       duration: .85, ease: "power3.out",
-      scrollTrigger: { trigger: s, start: "top 88%", once: true }
+      scrollTrigger: { trigger: img, start: "top 88%", once: true }
     });
   });
 
-  /* Todos os steps visíveis no mobile — sem toggle de is-active */
-  steps.forEach((step) => step.classList.add("is-active"));
+  lis.forEach((step) => step.classList.add("is-active"));
 
   return () => {
-    steps.forEach((step) => step.classList.remove("is-active"));
+    clones.forEach((c) => c.remove());
+    lis.forEach((step) => step.classList.remove("is-active"));
   };
 });
 

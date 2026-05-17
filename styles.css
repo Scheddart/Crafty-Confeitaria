@@ -313,6 +313,65 @@ ul, ol { list-style: none; }
   z-index: 0;
 }
 
+/* ============================================
+   HERO VIDEO + OVERLAY
+   ============================================ */
+.hero { background: var(--bg-dark); color: #fff; }
+
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  will-change: transform;
+}
+.hero__video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg,
+      rgba(15,13,11,.55) 0%,
+      rgba(15,13,11,.28) 38%,
+      rgba(15,13,11,.65) 100%);
+  pointer-events: none;
+}
+
+/* Texto e botões discretos sobre o vídeo */
+.hero__content { color: #fff; }
+.hero__eyebrow {
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.20);
+}
+.hero__title { color: #fff; text-shadow: 0 2px 30px rgba(0,0,0,.32); }
+.hero__sub   { color: rgba(255,255,255,.82); }
+
+.hero__actions .btn--primary {
+  background: rgba(255,255,255,.94);
+  color: var(--text);
+  backdrop-filter: blur(8px);
+}
+.hero__actions .btn--primary:hover { background: #fff; color: var(--primary); }
+
+.hero__actions .btn--ghost {
+  border-color: rgba(255,255,255,.55);
+  color: #fff;
+  backdrop-filter: blur(8px);
+}
+.hero__actions .btn--ghost:hover { background: rgba(255,255,255,.95); color: var(--text); }
+
+.hero__scroll { color: rgba(255,255,255,.7); }
+.hero__scroll-line { background: rgba(255,255,255,.22); }
+.hero__scroll-line span { background: rgba(255,255,255,.85); }
+
+/* Floating images conflitam com o vídeo — escondidas em todos os tamanhos */
+.hero__floating { display: none !important; }
+
 .hero__content {
   position: relative;
   z-index: 2;
@@ -401,6 +460,8 @@ ul, ol { list-style: none; }
 
 @media (max-width: 900px) {
   .hero__floating { display: none; }
+  /* Remove o indicador "Role para conhecer" no mobile (sobrepunha os botões) */
+  .hero__scroll { display: none; }
 }
 
 /* ============================================
@@ -721,28 +782,30 @@ ul, ol { list-style: none; }
 
 @media (max-width: 900px) {
   .process__sticky { height: auto; padding: 8vh clamp(1.5rem,4vw,3rem); overflow: visible; }
-  .process__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .process__grid { grid-template-columns: 1fr; gap: 2.5rem; }
 
-  /* Stickers saem do absolute e viram coluna normal */
-  .process__stack {
-    position: static;
+  /* Stack original escondido — as imagens são clonadas dentro de cada step pelo JS */
+  .process__stack { display: none; }
+
+  /* Cada step ganha sua imagem logo abaixo da descrição */
+  .step__img {
+    margin-top: 1.2rem;
     width: 100%;
-    height: auto;
-    max-height: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    height: min(60vw, 280px);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(0,0,0,.35);
+    opacity: 0;
+    transform: translateY(20px);
   }
-  .sticker {
-    position: relative;
-    inset: auto;
-    height: min(72vw, 400px);
-    box-shadow: 0 12px 30px rgba(0,0,0,.3);
+  .step__img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
   }
 
-  /* Todos os steps visíveis (sem o toggle de is-active) */
-  .process__list li { opacity: 1 !important; }
-  .process__list li.is-active { padding: 1rem 0; }
+  /* Todos os steps visíveis */
+  .process__list li { opacity: 1 !important; padding: 1.5rem 0 !important; }
 }
 
 /* ============================================

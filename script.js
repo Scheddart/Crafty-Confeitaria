@@ -9,6 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
    adjacentes durante a interpolação suave do Lenis. */
 ScrollTrigger.defaults({ pinType: "transform" });
 
+/* Contexto responsivo — desktop × mobile sem if/else espalhado */
+const mm = gsap.matchMedia();
+
 /* ----------------------------------------------------------
    1. SMOOTH SCROLL
    ---------------------------------------------------------- */
@@ -175,92 +178,113 @@ gsap.from("[data-mask] img", {
 });
 
 /* ----------------------------------------------------------
-   10. SHOWCASE — scroll horizontal pinned
+   10. SHOWCASE — scroll horizontal pinned (desktop only)
+   No mobile: CSS scroll-snap nativo, sem pin.
    ---------------------------------------------------------- */
-const hScrollSection = document.querySelector("[data-h-scroll]");
-const hTrack = document.querySelector("[data-h-track]");
+mm.add("(min-width: 901px)", () => {
+  const hScrollSection = document.querySelector("[data-h-scroll]");
+  const hTrack = document.querySelector("[data-h-track]");
 
-if (hScrollSection && hTrack) {
-  const getDistance = () => hTrack.scrollWidth - window.innerWidth + 80;
+  if (hScrollSection && hTrack) {
+    const getDistance = () => hTrack.scrollWidth - window.innerWidth + 80;
 
-  gsap.to(hTrack, {
-    x: () => -getDistance(),
-    ease: "none",
-    scrollTrigger: {
-      trigger: hScrollSection,
-      pin: true,
-      pinSpacing: true,
-      anticipatePin: 1,
-      scrub: 1,
-      start: "top top",
-      end: () => "+=" + getDistance(),
-      invalidateOnRefresh: true
-    }
-  });
-}
+    gsap.to(hTrack, {
+      x: () => -getDistance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: hScrollSection,
+        pin: true,
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 1,
+        start: "top top",
+        end: () => "+=" + getDistance(),
+        invalidateOnRefresh: true
+      }
+    });
+  }
+});
 
 /* ----------------------------------------------------------
-   11. PROCESS — pinned + stack de stickers
+   11. PROCESS — pinned + stack de stickers (desktop only)
    ---------------------------------------------------------- */
-const processSection = document.querySelector(".process");
-const stickers = document.querySelectorAll(".sticker");
-const steps    = document.querySelectorAll("[data-step]");
+mm.add("(min-width: 901px)", () => {
+  const processSection = document.querySelector(".process");
+  const stickers = document.querySelectorAll(".sticker");
+  const steps    = document.querySelectorAll("[data-step]");
 
-if (processSection && stickers.length) {
-  const total = stickers.length;
+  if (processSection && stickers.length) {
+    const total = stickers.length;
 
-  /* posicionamento inicial: stack apertado */
-  stickers.forEach((s, i) => {
-    const depth = i; // 0 = front, total-1 = back
-    gsap.set(s, {
-      zIndex: total - depth,
-      rotate: depth === 0 ? 0 : (depth % 2 === 0 ? depth * 1.2 : depth * -1.2),
-      x: depth * 4,
-      y: depth * 6,
-      scale: 1 - depth * 0.025,
-      opacity: 1,
-      transformOrigin: "center center"
+    /* posicionamento inicial: stack apertado */
+    stickers.forEach((s, i) => {
+      const depth = i;
+      gsap.set(s, {
+        zIndex: total - depth,
+        rotate: depth === 0 ? 0 : (depth % 2 === 0 ? depth * 1.2 : depth * -1.2),
+        x: depth * 4,
+        y: depth * 6,
+        scale: 1 - depth * 0.025,
+        opacity: 1,
+        transformOrigin: "center center"
+      });
+    });
+
+    const processTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: processSection,
+        start: "top top",
+        end: () => "+=" + ((total - 1) * window.innerHeight * 0.9),
+        pin: ".process__sticky",
+        pinSpacing: true,
+        anticipatePin: 1,
+        scrub: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const idx = Math.min(total - 1, Math.round(self.progress * (total - 1)));
+          steps.forEach((step, i) => step.classList.toggle("is-active", i === idx));
+        }
+      }
+    });
+
+    stickers.forEach((s, i) => {
+      if (i === total - 1) return;
+      processTl.to(s, {
+        yPercent: -130, rotate: -12, opacity: 0,
+        ease: "power2.in", duration: 1
+      }, i);
+      processTl.to(stickers[i + 1], {
+        x: 0, y: 0, rotate: 0, scale: 1,
+        ease: "power2.out", duration: 1
+      }, i);
+    });
+  }
+});
+
+/* ----------------------------------------------------------
+   11b. PROCESS — vertical + fade (mobile)
+   Sem pin, sem stack. Cada sticker faz fade-in ao entrar na tela.
+   ---------------------------------------------------------- */
+mm.add("(max-width: 900px)", () => {
+  const stickers = document.querySelectorAll(".sticker");
+  const steps    = document.querySelectorAll("[data-step]");
+
+  stickers.forEach((s) => {
+    gsap.set(s, { opacity: 0, y: 30 });
+    gsap.to(s, {
+      opacity: 1, y: 0,
+      duration: .85, ease: "power3.out",
+      scrollTrigger: { trigger: s, start: "top 88%", once: true }
     });
   });
 
-  /* Timeline única atrelada ao pin — evita o bug dos ScrollTriggers
-     separados firarem em posições calculadas erradas. Cada transição
-     (sticker i sai + sticker i+1 avança) ocupa um "slot" do scrub. */
-  const processTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: processSection,
-      start: "top top",
-      end: () => "+=" + ((total - 1) * window.innerHeight * 0.9),
-      pin: ".process__sticky",
-      pinSpacing: true,
-      anticipatePin: 1,
-      scrub: 1,
-      invalidateOnRefresh: true,
-      onUpdate: (self) => {
-        const idx = Math.min(total - 1, Math.round(self.progress * (total - 1)));
-        steps.forEach((step, i) => step.classList.toggle("is-active", i === idx));
-      }
-    }
-  });
+  /* Todos os steps visíveis no mobile — sem toggle de is-active */
+  steps.forEach((step) => step.classList.add("is-active"));
 
-  stickers.forEach((s, i) => {
-    if (i === total - 1) return;
-    /* sticker da frente sai pra cima */
-    processTl.to(s, {
-      yPercent: -130,
-      rotate: -12,
-      opacity: 0,
-      ease: "power2.in",
-      duration: 1
-    }, i);
-    /* próximo sticker avança pra posição central simultaneamente */
-    processTl.to(stickers[i + 1], {
-      x: 0, y: 0, rotate: 0, scale: 1,
-      ease: "power2.out",
-      duration: 1
-    }, i);
-  });
-}
+  return () => {
+    steps.forEach((step) => step.classList.remove("is-active"));
+  };
+});
 
 /* ----------------------------------------------------------
    12. FEATURED — parallax forte do fundo
@@ -339,6 +363,41 @@ document.querySelectorAll('a[href^="#"]').forEach((a) => {
     }
   });
 });
+
+/* ----------------------------------------------------------
+   15b. HAMBURGER MENU (mobile)
+   ---------------------------------------------------------- */
+const hamburger = document.querySelector(".nav__hamburger");
+const mobileNav = document.querySelector(".nav__mobile");
+
+if (hamburger && mobileNav) {
+  const openMenu = () => {
+    hamburger.classList.add("is-open");
+    hamburger.setAttribute("aria-expanded", "true");
+    mobileNav.classList.add("is-open");
+    mobileNav.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    lenis.stop();
+  };
+
+  const closeMenu = () => {
+    hamburger.classList.remove("is-open");
+    hamburger.setAttribute("aria-expanded", "false");
+    mobileNav.classList.remove("is-open");
+    mobileNav.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    lenis.start();
+  };
+
+  hamburger.addEventListener("click", () =>
+    hamburger.classList.contains("is-open") ? closeMenu() : openMenu()
+  );
+
+  /* Fecha ao clicar em qualquer link do overlay */
+  mobileNav.querySelectorAll("a[href]").forEach((a) =>
+    a.addEventListener("click", closeMenu)
+  );
+}
 
 /* ----------------------------------------------------------
    16. REFRESH ao redimensionar (importante p/ pin/horizontal)

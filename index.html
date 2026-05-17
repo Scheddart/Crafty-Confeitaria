@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>CRAFTY — Confeitaria autoral, feita à mão</title>
+  <meta name="description" content="Brownies gourmet, muffins, bolos artesanais e surpresas no copo. Cada doce é feito à mão em pequenos lotes, com ingredientes premium e zero atalhos." />
+  <meta name="keywords" content="confeitaria, brownie gourmet, muffin, bolo artesanal, sobremesa no copo, doces autorais, doces sob encomenda" />
+  <meta name="author" content="CRAFTY" />
+  <meta name="theme-color" content="#0f0d0b" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CRAFTY — Confeitaria autoral" />
+  <meta property="og:description" content="Doces feitos à mão, em pequenos lotes, com obsessão por detalhes." />
+  <meta property="og:image" content="assets/logo.svg" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,600;9..144,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=5" />
+</head>
+<body>
+
+  <!-- ===== Loader ===== -->
+  <div class="loader" data-loader>
+    <div class="loader__inner">
+      <span class="loader__text" data-loader-text>CRAFTY</span>
+      <div class="loader__bar"><span data-loader-bar></span></div>
+    </div>
+  </div>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav" data-nav>
+    <a class="nav__logo" href="#" aria-label="CRAFTY — voltar ao topo">
+      <img src="assets/logo.svg" alt="CRAFTY" />
+    </a>
+    <ul class="nav__menu">
+      <li><a href="#intro" data-link>História</a></li>
+      <li><a href="#showcase" data-link>Coleção</a></li>
+      <li><a href="#process" data-link>Processo</a></li>
+      <li><a href="#quote" data-link>Depoimentos</a></li>
+      <li><a href="#contact" data-link>Contato</a></li>
+    </ul>
+    <a class="nav__cta" href="#contact" data-link>Encomendar →</a>
+  </nav>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" data-section="hero">
+      <div class="hero__bg" data-hero-bg></div>
+
+      <div class="hero__content">
+        <span class="hero__eyebrow" data-reveal>★ Confeitaria autoral · Desde 2018</span>
+        <h1 class="hero__title">
+          <span class="line" data-split>Cada doce é uma obra.</span>
+          <span class="line" data-split>Cada mordida,</span>
+          <span class="line italic" data-split>um pequeno milagre.</span>
+        </h1>
+        <p class="hero__sub" data-reveal>
+          Brownies fundentes, muffins úmidos, bolos memoráveis e surpresas
+          no copo — todos feitos à mão, sem atalhos, em pequenos lotes.
+        </p>
+
+        <div class="hero__actions" data-reveal>
+          <a href="#showcase" class="btn btn--primary">Ver coleção ↓</a>
+          <a href="#contact" class="btn btn--ghost">Encomendar</a>
+        </div>
+      </div>
+
+      <div class="hero__scroll" data-reveal>
+        <span>Role para conhecer</span>
+        <div class="hero__scroll-line"><span></span></div>
+      </div>
+
+      <div class="hero__floating" aria-hidden="true">
+        <div class="float float--1" data-float="0.3">
+          <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&q=80" alt="" />
+        </div>
+        <div class="float float--2" data-float="-0.5">
+          <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=600&q=80" alt="" />
+        </div>
+        <div class="float float--3" data-float="0.4">
+          <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600&q=80" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee__track" data-marquee>
+        <span>Feito à mão</span><em>✦</em>
+        <span>Pequenos lotes</span><em>✦</em>
+        <span>Chocolate belga</span><em>✦</em>
+        <span>Desde 2018</span><em>✦</em>
+        <span>Sem atalhos</span><em>✦</em>
+        <span>Feito à mão</span><em>✦</em>
+        <span>Pequenos lotes</span><em>✦</em>
+        <span>Chocolate belga</span><em>✦</em>
+        <span>Desde 2018</span><em>✦</em>
+        <span>Sem atalhos</span><em>✦</em>
+      </div>
+    </section>
+
+    <!-- ===== INTRO ===== -->
+    <section class="intro" id="intro" data-section="intro">
+      <div class="intro__sticky">
+        <div class="intro__grid">
+          <div class="intro__media">
+            <div class="intro__mask" data-mask>
+              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900&q=80" alt="Confeiteira preparando massa à mão" data-parallax="0.15" />
+            </div>
+            <div class="intro__stamp" data-spin>
+              <svg viewBox="0 0 100 100" aria-hidden="true">
+                <defs>
+                  <path id="circlePath" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
+                </defs>
+                <text font-family="Inter, sans-serif" font-size="9.5" letter-spacing="3" fill="currentColor">
+                  <textPath href="#circlePath">CRAFTY · EST · 2018 · ORIGINAL · </textPath>
+                </text>
+              </svg>
+            </div>
+          </div>
+
+          <div class="intro__text">
+            <span class="eyebrow" data-reveal>01 — Nossa história</span>
+            <h2 class="h2" data-split-words>
+              Nasceu na cozinha de casa. Cresceu por causa de quem voltou.
+            </h2>
+            <p data-reveal>
+              Em 2018, começamos batendo massa pra família e amigos. Em 2026,
+              somos uma confeitaria autoral que ainda mede ingrediente com
+              balança de joalheiro. O que mudou foi tudo. O que não mudou é
+              o cuidado em cada gramada.
+            </p>
+            <p data-reveal>
+              Sem essências, sem fermento químico de sabor, sem encurtar
+              processo pra entregar mais rápido. Cada brownie é o brownie
+              que faríamos pra alguém especial.
+            </p>
+            <a href="#showcase" class="link-arrow" data-reveal>
+              Ver nossa coleção <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HORIZONTAL SHOWCASE ===== -->
+    <section class="showcase" id="showcase" data-section="showcase">
+      <div class="showcase__header">
+        <span class="eyebrow" data-reveal>02 — Coleção</span>
+        <h2 class="h2" data-split-words>Quatro categorias. Infinitas combinações.</h2>
+        <p class="showcase__sub" data-reveal>
+          Role lateralmente. Passe o cursor sobre cada item.
+        </p>
+      </div>
+
+      <div class="showcase__pin" data-h-scroll>
+        <div class="showcase__track" data-h-track>
+
+          <article class="card">
+            <div class="card__img">
+              <img class="img-primary" src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=900&q=80" alt="Brownie gourmet de chocolate belga" />
+              <img class="img-hover" src="https://images.unsplash.com/photo-1610450949065-1f2841536c88?w=900&q=80" alt="Brownie cortado mostrando o miolo cremoso" />
+            </div>
+            <div class="card__meta">
+              <span>01</span><span>Carro-chefe</span>
+            </div>
+            <h3>Brownie gourmet</h3>
+            <p>Casca crocante, miolo molhado, chocolate belga 70%.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__img">
+              <img class="img-primary" src="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=900&q=80" alt="Muffin assado na hora com cobertura" />
+              <img class="img-hover" src="https://images.unsplash.com/photo-1587668178277-295251f900ce?w=900&q=80" alt="Muffin partido revelando o recheio" />
+            </div>
+            <div class="card__meta">
+              <span>02</span><span>Best-seller</span>
+            </div>
+            <h3>Muffins</h3>
+            <p>Massa úmida, recheio surpresa, assados na hora.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__img">
+              <img class="img-primary" src="https://images.unsplash.com/photo-1535141192574-5d4897c12636?w=900&q=80" alt="Bolo artesanal em camadas decorado" />
+              <img class="img-hover" src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80" alt="Fatia de bolo mostrando as camadas" />
+            </div>
+            <div class="card__meta">
+              <span>03</span><span>Sob encomenda</span>
+            </div>
+            <h3>Bolos</h3>
+            <p>Camadas perfeitas pra dividir — ou comemorar sozinho.</p>
+          </article>
+
+          <article class="card">
+            <div class="card__img">
+              <img class="img-primary" src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=900&q=80" alt="Sobremesa servida em copo individual" />
+              <img class="img-hover" src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=900&q=80" alt="Detalhe da sobremesa no copo com cobertura" />
+            </div>
+            <div class="card__meta">
+              <span>04</span><span>Novidade</span>
+            </div>
+            <h3>Surpresa no copo</h3>
+            <p>O melhor da confeitaria, em porção individual.</p>
+          </article>
+
+          <article class="card card--cta">
+            <h3>Ver cardápio completo</h3>
+            <p>Pesos, recheios, valores e prazos.</p>
+            <a href="#contact" class="btn btn--primary">Acessar →</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS (pinned · sticker stack) ===== -->
+    <section class="process" id="process" data-section="process">
+      <div class="process__sticky">
+        <div class="process__grid">
+
+          <div class="process__steps">
+            <span class="eyebrow">03 — Processo</span>
+            <h2 class="h2">Quatro etapas, zero atalhos.</h2>
+            <p class="process__intro">
+              Do ingrediente à embalagem, cada gesto é deliberado.
+              Nada de pressa quando o objetivo é durar na memória.
+            </p>
+
+            <ol class="process__list" data-steps>
+              <li data-step="0" class="is-active">
+                <span class="num">01</span>
+                <div>
+                  <h4>Seleção</h4>
+                  <p>Ingredientes premium, fornecedores que viraram amigos. Nada entra sem provar.</p>
+                </div>
+              </li>
+              <li data-step="1">
+                <span class="num">02</span>
+                <div>
+                  <h4>Preparação</h4>
+                  <p>Massas descansadas, chocolate temperado, mise en place obsessivo.</p>
+                </div>
+              </li>
+              <li data-step="2">
+                <span class="num">03</span>
+                <div>
+                  <h4>Execução</h4>
+                  <p>Forno a 175°C, ponto exato, fragrância de baunilha tomando a cozinha.</p>
+                </div>
+              </li>
+              <li data-step="3">
+                <span class="num">04</span>
+                <div>
+                  <h4>Entrega</h4>
+                  <p>Embalado na hora, transportado com cuidado, na sua mesa em até 2 horas.</p>
+                </div>
+              </li>
+            </ol>
+          </div>
+
+          <div class="process__stack" data-stack>
+            <!-- Stickers empilhados — front (índice 0) na frente, back atrás -->
+            <div class="sticker" data-sticker="0">
+              <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900&q=80" alt="Etapa 1 — seleção dos ingredientes" />
+              <span class="sticker__label">01 · Seleção</span>
+            </div>
+            <div class="sticker" data-sticker="1">
+              <img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=900&q=80" alt="Etapa 2 — preparação da massa" />
+              <span class="sticker__label">02 · Preparação</span>
+            </div>
+            <div class="sticker" data-sticker="2">
+              <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=900&q=80" alt="Etapa 3 — execução no forno" />
+              <span class="sticker__label">03 · Execução</span>
+            </div>
+            <div class="sticker" data-sticker="3">
+              <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=900&q=80" alt="Etapa 4 — entrega cuidadosa" />
+              <span class="sticker__label">04 · Entrega</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURED ===== -->
+    <section class="featured" data-section="featured">
+      <div class="featured__bg" data-parallax-bg>
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=1800&q=80" alt="" />
+      </div>
+      <div class="featured__overlay"></div>
+      <div class="featured__content">
+        <span class="eyebrow eyebrow--light" data-reveal>★ Manifesto</span>
+        <h2 class="h1" data-split-words>
+          Feito pra quem nota os detalhes.
+        </h2>
+        <p data-reveal>
+          Se você consegue distinguir manteiga francesa de margarina,
+          chocolate de cobertura, baunilha de essência — você é nosso cliente.
+        </p>
+        <a href="#contact" class="btn btn--ghost btn--light">Falar com a confeitaria →</a>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats" data-section="stats">
+      <div class="stats__header">
+        <span class="eyebrow" data-reveal>★ Em números</span>
+        <h2 class="h2" data-split-words>Pequena confeitaria, números honestos.</h2>
+      </div>
+      <div class="stats__grid">
+        <div class="stat">
+          <span class="stat__num" data-counter="120">0</span><span class="stat__suf">+</span>
+          <p>Receitas no portfólio</p>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-counter="15">0</span><span class="stat__suf">k</span>
+          <p>Clientes apaixonados</p>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-counter="98">0</span><span class="stat__suf">%</span>
+          <p>Recomendariam pra amigos</p>
+        </div>
+        <div class="stat">
+          <span class="stat__num" data-counter="2018">0</span><span class="stat__suf"></span>
+          <p>Desde</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS CAROUSEL ===== -->
+    <section class="quote" id="quote" data-section="quote">
+      <div class="quote__header">
+        <span class="eyebrow" data-reveal>04 — Quem fala da gente</span>
+        <h2 class="h2" data-split-words>O melhor marketing é um cliente que repete.</h2>
+      </div>
+
+      <div class="testimonials" data-testimonials aria-label="Depoimentos de clientes">
+        <div class="testimonials__track" data-testimonials-track>
+
+          <article class="testimonial">
+            <span class="testimonial__stars">★★★★★</span>
+            <blockquote>"O brownie da CRAFTY é o motivo de eu não conseguir manter dieta. Vale cada caloria."</blockquote>
+            <footer>
+              <span class="avatar" style="background:#d4a574"></span>
+              <div><cite>Marina S.</cite><small>Cliente desde 2021</small></div>
+            </footer>
+          </article>
+
+          <article class="testimonial">
+            <span class="testimonial__stars">★★★★★</span>
+            <blockquote>"Pedi pro aniversário e todo mundo perguntou onde comprei. Nunca mais comprei bolo em outro lugar."</blockquote>
+            <footer>
+              <span class="avatar" style="background:#9b8c75"></span>
+              <div><cite>Pedro R.</cite><small>Cliente recorrente</small></div>
+            </footer>
+          </article>
+
+          <article class="testimonial">
+            <span class="testimonial__stars">★★★★★</span>
+            <blockquote>"Surpresa no copo é viciante. Comprei três, comi os três. Sem culpa."</blockquote>
+            <footer>
+              <span class="avatar" style="background:#c1654a"></span>
+              <div><cite>Júlia M.</cite><small>Primeira compra · 2025</small></div>
+            </footer>
+          </article>
+
+          <article class="testimonial">
+            <span class="testimonial__stars">★★★★★</span>
+            <blockquote>"Atendimento impecável, entrega no horário e o sabor… sem palavras."</blockquote>
+            <footer>
+              <span class="avatar" style="background:#7b6a52"></span>
+              <div><cite>Felipe A.</cite><small>Empresa parceira</small></div>
+            </footer>
+          </article>
+
+          <article class="testimonial">
+            <span class="testimonial__stars">★★★★★</span>
+            <blockquote>"Encomendei pro casamento da minha irmã. Foram aplaudidos no jantar."</blockquote>
+            <footer>
+              <span class="avatar" style="background:#b58755"></span>
+              <div><cite>Camila L.</cite><small>Casamento · 2024</small></div>
+            </footer>
+          </article>
+
+          <article class="testimonial">
+            <span class="testimonial__stars">★★★★★</span>
+            <blockquote>"Cresci comendo bolo de padaria. Agora não consigo mais. CRAFTY estragou tudo — no melhor sentido."</blockquote>
+            <footer>
+              <span class="avatar" style="background:#8d6a44"></span>
+              <div><cite>Bruno T.</cite><small>Cliente desde 2022</small></div>
+            </footer>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta" id="contact" data-section="cta">
+      <div class="cta__inner">
+        <span class="eyebrow eyebrow--light" data-reveal>05 — Vamos conversar</span>
+        <h2 class="h1" data-split-words>
+          Pronto pra começar algo memorável?
+        </h2>
+        <p data-reveal>
+          Encomendas individuais ou pra evento. Nos conte o que precisa
+          e a gente desenha uma proposta sob medida.
+        </p>
+        <a href="mailto:contato@crafty.com.br" class="btn btn--primary btn--big">
+          contato@crafty.com.br →
+        </a>
+        <div class="cta__links" data-reveal>
+          <a href="#">Instagram</a>
+          <a href="#">WhatsApp</a>
+          <a href="#">Cardápio (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <a class="nav__logo nav__logo--footer" href="#" aria-label="CRAFTY">
+          <img src="assets/logo.svg" alt="CRAFTY" />
+        </a>
+        <p>Confeitaria autoral. Feita à mão, em pequenos lotes, sem atalhos.</p>
+      </div>
+      <div>
+        <h5>Navegar</h5>
+        <a href="#intro">História</a>
+        <a href="#showcase">Coleção</a>
+        <a href="#process">Processo</a>
+        <a href="#quote">Depoimentos</a>
+        <a href="#contact">Contato</a>
+      </div>
+      <div>
+        <h5>Endereço</h5>
+        <p>Rua Exemplo, 123<br />Cidade — UF<br />Aberto ter–sáb · 10h–19h</p>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <a href="mailto:contato@crafty.com.br">contato@crafty.com.br</a>
+        <a href="#">+55 (00) 00000-0000</a>
+        <a href="#">@crafty.confeitaria</a>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 CRAFTY Confeitaria. Todos os direitos reservados.</span>
+      <span>Feito com cuidado.</span>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="https://unpkg.com/split-type"></script>
+  <script src="script.js?v=7"></script>
+</body>
+</html>

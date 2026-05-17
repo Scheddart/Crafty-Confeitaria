@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 200" fill="none">
+  <g stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 110 Q35 35 130 60 L235 95 Q245 105 230 118 L120 145 Q70 150 60 130 Z"/>
+    <path d="M130 60 L255 35 L255 130 L185 130"/>
+    <line x1="185" y1="130" x2="185" y2="175"/>
+  </g>
+  <text x="320" y="170" font-family="'Helvetica Neue', Arial Black, sans-serif"
+        font-size="78" font-weight="900" letter-spacing="18" fill="currentColor">CRAFTY</text>
+</svg>
